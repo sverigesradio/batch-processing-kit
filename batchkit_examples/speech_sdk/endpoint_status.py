@@ -36,7 +36,7 @@ class SpeechSDKEndpointStatusChecker(EndpointStatusChecker):
                     # Also expect a healthy response from /status path which
                     # indicates the container's components are overall okay
                     # including api key validity.
-                    status_url = "http://{0}:{1}/status".format(host, port)
+                    status_url = "{2}://{0}:{1}/status".format(host, port, 'https' if is_secure else 'http')
                     result = requests.get(status_url)
                     result = json.loads(result.text)
                     if 'valid' in result['apiStatus'].lower() and 'valid' in result['apiStatusMessage'].lower():
